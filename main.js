@@ -13,7 +13,7 @@ function setCookie(name, value, days=365) {
   document.cookie = name + "=" + encodeURIComponent(value) + ";expires=" + expires + ";path=/";
 }
 function getCookie(name) {
-  const v = document.cookie.match('(^|;)\s*' + name + '\s*=\s*([^;]+)');
+  const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
   return v ? decodeURIComponent(v.pop()) : null;
 }
 
@@ -39,25 +39,25 @@ function renderOrcaList() {
   const orca = loadOrca();
   const el = document.getElementById('orcalist');
   if (orca) {
-    el.innerHTML = \`
+    el.innerHTML = `
       <div class="card" style="text-align:center;">
-        <div style="font-size:4rem;transition:all .3s;" id="orcaimage">\${getOrcaImage(orca.stage)}</div>
-        <h2>\${orca.name}（年齢:\${orca.age}）</h2>
-        <p>体重: \${orca.weight} kg</p>
-        <p>お腹空き: \${orca.hunger}</p>
-        <p>健康: \${orca.health}</p>
-        <p>成長段階: \${["赤ちゃん","子ども","大人"][orca.stage-1]}</p>
+        <div style="font-size:4rem;transition:all .3s;" id="orcaimage">${getOrcaImage(orca.stage)}</div>
+        <h2>${orca.name}（年齢:${orca.age}）</h2>
+        <p>体重: ${orca.weight} kg</p>
+        <p>お腹空き: ${orca.hunger}</p>
+        <p>健康: ${orca.health}</p>
+        <p>成長段階: ${["赤ちゃん","子ども","大人"][orca.stage-1]}</p>
         <button onclick="showOrcaDetail()">詳細・育成</button>
       </div>
-    \`;
+    `;
   } else {
-    el.innerHTML = \`
+    el.innerHTML = `
       <div class="card">
         <h2>シャチを育てよう！</h2>
         <input id="orcaname" placeholder="シャチの名前" />
         <button onclick="createOrca()">はじめる</button>
       </div>
-    \`;
+    `;
   }
 }
 
@@ -72,22 +72,22 @@ window.showOrcaDetail = function () {
   document.getElementById('orcalist').style.display = 'none';
   const orca = loadOrca();
   document.getElementById('orcadetail').style.display = 'block';
-  document.getElementById('orcadetail').innerHTML = \`
+  document.getElementById('orcadetail').innerHTML = `
     <div class="card" style="text-align:center;">
-      <div style="font-size:5rem;transition:all .3s;" id="orcaimage">\${getOrcaImage(orca.stage)}</div>
-      <h2>\${orca.name} の育成</h2>
-      <p>年齢: \${orca.age}</p>
-      <p>体重: \${orca.weight} kg</p>
-      <p>お腹空き: \${orca.hunger}</p>
-      <p>健康: \${orca.health}</p>
-      <p>成長段階: \${["赤ちゃん","子ども","大人"][orca.stage-1]}</p>
-      <div style="margin:12px 0;min-height:1.8em;"><span id="orcamessage">\${orca.message||""}</span></div>
+      <div style="font-size:5rem;transition:all .3s;" id="orcaimage">${getOrcaImage(orca.stage)}</div>
+      <h2>${orca.name} の育成</h2>
+      <p>年齢: ${orca.age}</p>
+      <p>体重: ${orca.weight} kg</p>
+      <p>お腹空き: ${orca.hunger}</p>
+      <p>健康: ${orca.health}</p>
+      <p>成長段階: ${["赤ちゃん","子ども","大人"][orca.stage-1]}</p>
+      <div style="margin:12px 0;min-height:1.8em;"><span id="orcamessage">${orca.message||""}</span></div>
       <button onclick="feedOrca()">餌をやる</button>
       <button onclick="trainOrca()">トレーニング</button>
       <button onclick="cleanTank()">水槽掃除</button>
       <button onclick="backToList()">戻る</button>
     </div>
-  \`;
+  `;
   if(orca.lastAction == "feed") feedAnimation();
   if(orca.lastAction == "train") trainAnimation();
   if(orca.lastAction == "clean") cleanAnimation();
